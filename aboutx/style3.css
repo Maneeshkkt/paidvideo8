@@ -397,7 +397,7 @@ table{
     display: flex;
     justify-content: center;
     align-items: center;
-    background: url(forex1.jpeg);
+    background: url(imgb.jpeg);
     
 }
 
@@ -709,4 +709,5 @@ marquee{
         font-size: 14px;
 
     }
+
 }
