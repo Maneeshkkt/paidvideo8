@@ -15,9 +15,12 @@
             <div class="logo"><img src="aboutx/logo (1).png" alt="logo">
                
             </div>
-            <li> <a href="index.html" aria-current="page" class="home" >Videos</a></li>
+            <li> <a href="dashboard.html" aria-current="page" class="home" >Videos</a></li>
             <li> <a href="news2.html" class="Ser" >News</a></li>
             <li > <a href="pdf3.html">Fx Pdf</a></li>
+            
+            
+            <li><button id="logoutBtn">Logout</button></li>
             <!-- <li> <a href="index4.html" class="About" >About</a></li>
             <li> <a href="index5.html" class="contact">Contact</a></li> -->
             
@@ -97,11 +100,11 @@
     </div>
       </div>
       <div class="meta4">
-        <a href="https://octa.click/iXGt9oJPoem" target="_blank"><img src="octa3.jpg" alt="img">OctaTrading App </a>
+        <a href="https://octa.click/iXGt9oJPoem" target="_blank"><img src="aboutx/octa3.jpg" alt="img">OctaTrading App </a>
         <br>
-        <a href="https://www.metatrader4.com/en/download" target="_blank"> <img src="mt4.jpg" alt="">Meta Trader 4 App </a>
+        <a href="https://www.metatrader4.com/en/download" target="_blank"> <img src="aboutx/mt4.jpg" alt="">Meta Trader 4 App </a>
         <br>
-        <a href="https://www.metatrader5.com/en/download" target="_blank"><img src="mt5.jpg" alt="">Meta Trader 5 App</a>
+        <a href="https://www.metatrader5.com/en/download" target="_blank"><img src="aboutx/mt5.jpg" alt="">Meta Trader 5 App</a>
       </div>
 
 
@@ -152,7 +155,7 @@ Remember that forex trading carries inherent risks, and there are no guarantees 
         <a class="btn56" href="https://www.instagram.com/the2business?utm_source=qr&igsh=MXcwZnhxbTc4dzQyZQ==" target="_blank">
             <i class="fa-brands fa-instagram"></i>
         </a>
-        <a class="btn56" href="https://youtube.com/@ManeeshVi?si=A5tW4bYuTGpN-q7d" target="_blank">
+        <a class="btn56" href="#" target="_blank">
             <i class="fa-brands fa-youtube"></i>
         </a>
         <a class="btn56" href="https://chat.whatsapp.com/F6eV2DGaab3EeYfHq7IDR6" target="_blank">
@@ -183,9 +186,30 @@ Remember that forex trading carries inherent risks, and there are no guarantees 
      </footer>
 
     
-    
+           <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBFoiwTyaGkdRdJNQ0CiiWgeQJXZV7HAeI",
+      authDomain: "the2business.firebaseapp.com",
+      projectId: "the2business",
+      storageBucket: "the2business.firebasestorage.app",
+      messagingSenderId: "626370798689",
+      appId: "1:626370798689:web:abff6bb79961a7416bb620"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    document.getElementById("logoutBtn").addEventListener("click", async () => {
+      await signOut(auth);
+      window.location.href = "index.html";
+    });
+  </script>
          <script src="app5.js"></script>
          
 </body>
 </html>
+
 
