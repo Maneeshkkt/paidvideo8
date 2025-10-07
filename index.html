@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The2business Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex; justify-content: center; align-items: center;
+      height: 100vh; background: #4c4c4e;
+    }
+    .container {
+      width: 350px; background: white; padding: 20px;
+      border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 { text-align: center; margin-bottom: 20px; }
+    input {
+      width: 100%; padding: 10px; margin: 10px 0;
+      border: 1px solid #ccc; border-radius: 5px;
+    }
+    button {
+      width: 100%; padding: 10px; border: none;
+      background: #292929; color: white; font-size: 16px;
+      border-radius: 5px; cursor: pointer;
+    }
+    button:hover { background: #565657; }
+    p { text-align: center; margin-top: 10px; }
+    a { color: #2886e3; cursor: pointer; }
+  </style>
+</head>
+<body>
+  
+  <div class="container">
+    
+
+    <h2 id="formTitle">Login</h2>
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <button id="submitBtn">Login</button>
+    <p id="toggleText">Don't have an account? <a id="toggleLink">Signup</a></p>
+    <p id="message" style="color:red; text-align:center;"></p>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script type="module">
+    // Import Firebase modules (v9+)
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { 
+      getAuth, 
+      createUserWithEmailAndPassword, 
+      signInWithEmailAndPassword,
+      signOut 
+    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+    // ✅ Replace with your Firebase Config
+    const firebaseConfig = {
+      apiKey: "AIzaSyBFoiwTyaGkdRdJNQ0CiiWgeQJXZV7HAeI",
+      authDomain: "the2business.firebaseapp.com",
+      projectId: "the2business",
+      storageBucket: "the2business.firebasestorage.app",
+      messagingSenderId: "626370798689",
+      appId: "1:626370798689:web:abff6bb79961a7416bb620"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // Elements
+    const formTitle = document.getElementById("formTitle");
+    const email = document.getElementById("email");
+    const password = document.getElementById("password");
+    const submitBtn = document.getElementById("submitBtn");
+    const toggleText = document.getElementById("toggleText");
+    const toggleLink = document.getElementById("toggleLink");
+    const message = document.getElementById("message");
+
+    let isLogin = true;
+
+    // Toggle Login/Signup
+    toggleLink.addEventListener("click", () => {
+      isLogin = !isLogin;
+      formTitle.textContent = isLogin ? "Login" : "Signup";
+      submitBtn.textContent = isLogin ? "Login" : "Signup";
+      toggleText.innerHTML = isLogin 
+        ? `Don't have an account? <a id="toggleLink">Signup</a>` 
+        : `if Already have an account Please Page Refresh For login<a id="toggleLink"></a>`;
+      
+      // re-bind link
+      document.getElementById("toggleLink").addEventListener("click", arguments.callee);
+    });
+
+    // Submit handler
+    submitBtn.addEventListener("click", async () => {
+      message.textContent = "";
+      try {
+        if (isLogin) {
+          await signInWithEmailAndPassword(auth, email.value, password.value);
+          window.location.href = "dashboard.html"; 
+        } else {
+          await createUserWithEmailAndPassword(auth, email.value, password.value);
+          window.location.href = "dashboard.html"; 
+        }
+      } catch (error) {
+        message.textContent = error.message;
+      }
+    });
+  </script>
+</body>
+</html>
